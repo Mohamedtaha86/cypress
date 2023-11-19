@@ -51,16 +51,12 @@ describe('Authentication with proper credentials', () => {
    
     cy.contains("Christopher's günstigster").click();
     //PAGE 6   Mein Transport
-
     cy.contains("zur Buchung ").click();   
     cy.wait(900);       
     cy.get('#navigation-container').invoke('css', 'display', 'none');
 
     cy.contains('Gast / Registrieren').scrollIntoView();
     cy.contains('Gast / Registrieren').click();
-
-
-
     cy.scrollTo(0, -200); //mat-radio-16-input
     cy.get("#mat-radio-16-input").click();
     cy.get('#navigation-container').invoke('css', 'visibility', 'visible');
@@ -70,9 +66,7 @@ describe('Authentication with proper credentials', () => {
 
     cy.contains("Vorname").type("mohamed");
     //  Telefonnummer 
-
-
-    cy.contains('Nachname').type("hassan");
+   cy.contains('Nachname').type("hassan");
     cy.contains("E-Mail-Adresse").type('mohamedhassan86110@gmail.com');
     cy.contains("Straße u. Hausnummer").type('josephinenstrasse 10');
     cy.contains("Telefonnummer").type("015257567441");
@@ -83,24 +77,32 @@ describe('Authentication with proper credentials', () => {
     cy.contains("Deutschland").click();
     cy.wait(900);
 
-    cy.wait(5000); // Wait for 5 seconds (adjust the time as needed)
-    cy.contains("Weiter zu Start und Ziel").should('exist').should('be.visible').click();
-    cy.contains("Weiter zu Start und Ziel").click();
-    cy.wait(5000);
-    cy.contains("Weiter zu Start und Ziel").debug().click();
-    cy.wait(5000);
-    cy.get('button.mdc-button.mdc-button--unelevated.mat-mdc-unelevated-button.mat-primary.mat-mdc-button-base')
-      .invoke('css', 'visibility', 'visible');
+      cy.wait(5000);
+      cy.contains('button', 'Weiter zu Start und Ziel').click();
 
-
-    cy.get('button.button.mdc-button.mdc-button--unelevated.mat-mdc-unelevated-button.mat-primary.mat-mdc-button-base', { multiple: true })
-      .first()
-      .click({ force: true });
+   //page 2/5
+cy.get("#mat-input-21").clear().type('moh');
+    cy.wait(5000);
+cy.get('.mat-mdc-form-field-required-marker').invoke('attr', 'style', 'display: none');
     cy.wait(5000);
 
-    cy.get('button.button.mdc-button.mdc-button--unelevated.mat-mdc-unelevated-button.mat-primary.mat-mdc-button-base', { multiple: true })
-      .first()
-      .click({ force: true });
-  
+cy.get("#mat-input-22").clear().type('hassan');
+cy.get('mat-label').invoke('attr', 'style', 'display: none');
+
+cy.get("#mat-input-23").clear().type('karl marx allee 3');   
+cy.get("#mat-input-31").clear().type('Alex ');
+cy.get("#mat-input-32").clear().type('Brown');
+cy.get("#mat-input-33").clear().type('josephinenstrasse 10');   
+    cy.contains('button', 'Zum nächsten Schritt').click();  //mat-radio-11-input
+cy.wait(5000);
+      cy.contains("Vorkasse").click();
+cy.wait(5000);
+      cy.contains('button', 'Weiter').click();      //Buchung (4/5)
+
+   cy.scrollTo('top');
+
+cy.contains('Buchung (4/5)').scrollIntoView();
+
+
   });
 });
